@@ -34,7 +34,11 @@ def main():
 @api.route('/tellweight')
 def get_param():
     cus_id = request.args.get('customer_id', default='default_id', type=str)
-    cus_wt_now = float(request.args.get('keyword', default='0', type=str))
+    cus_wt_now = request.args.get('keyword', default='0', type=str)
+    try:
+        cus_wt_now = float(cus_wt_now)
+    except:
+        return jsonify({'out_tr_wght': 'ช่วยใส่น้ำหนักเป็นตัวเลขนะ'})
 
     today_time = datetime.now()
 
